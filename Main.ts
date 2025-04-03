@@ -1,57 +1,71 @@
 import { Personagem } from "./Personagem";
 import prompt from "prompt-sync";
-import { Faker, faker, pt_BR } from '@faker-js/faker';
+import { da, Faker, faker, pt_BR } from '@faker-js/faker';
 
 export const fakerBR = new Faker({
     locale: [pt_BR],
-  });
+});
 
-  console.log(fakerBR.person.firstName());
-  console.log(fakerBR.person.firstName());
-  console.log(fakerBR.person.firstName());
-  console.log(fakerBR.person.firstName());
-  console.log(fakerBR.person.firstName());
-  console.log(fakerBR.person.firstName());
-  console.log(fakerBR.person.firstName());
-  console.log(fakerBR.person.firstName());
 
 const teclado = prompt();
 const escolha = +teclado("Digite a opção: ")
 
 const person: Personagem = new Personagem();
 person.nome = "Edécio";
-person.armadura = 80;
-person.ataque = 1;
-person.classe = "Padre";
-person.defesa = 40;
-person.intelecto = 99;
-person.mana = 80;
+person.atributos.armadura = 80;
+person.atributos.ataque = 1;
+person.atributos.classe = "Padre";
+person.atributos.defesa = 40;
+person.atributos.intelecto = 99;
+person.atributos.mana = 80;
 person.raca = "Morto-vivo";
-person.stamina = 99;
-person.vida = 5;
+person.atributos.stamina = 99;
+person.atributos.vida = 5;
 
 console.table(person);
 
-let person2 = {...person};
 
-person2.nome = "Gladimir";
+function treinarAtaque() {
+    const numeroHoras: number = +teclado("Digite o número de horas para treinar ataque: ");
 
-console.log(person2.nome) // Gladimir
-console.log(person2.stamina) // 99
-console.log(person.nome) // Edécio
-console.log(person.stamina) // 99
+    const mensagem: string = person.treinarAtaque(numeroHoras);
 
-// Missão 1
-function treinarAtaque(personagem:Personagem, numeroHoras: number) {
-    const numeroGerado: number = randomizar(15, 30)
-    personagem.ataque = 10 + ((personagem.ataque*1.1)*numeroHoras)
-    personagem.vida -= numeroGerado * numeroHoras;
-    const morreu:boolean = personagem.vida < 0;
-    if(morreu){
-        throw new Error(`${personagem.nome} subiu!`)
-    }
+    console.log(mensagem);
+
 }
 
-function randomizar (base: number, limite: number){
-    return Math.floor(base + Math.random()*limite-base);
+function treinarDefesa() {
+
+    const numeroHoras: number = +teclado("Digite o número de horas para treinar defesa: ");
+
+    const mensagem: string = person.treinarDefesa(numeroHoras);
+
+    console.log(mensagem);
+
 }
+
+function descansar() {
+    const numeroHoras: number = +teclado("Digite o número de horas para descansar: ");
+
+    const mensagem = person.descansar(numeroHoras);
+
+    console.log(mensagem);
+
+}
+
+function desafiar() {
+    const nivel: number = +teclado("Digite o nível do oponente: ");
+    console.log('Desafiando o oponente...');
+
+    const mensagem = person.desafiar(nivel);
+
+    console.log(mensagem);
+
+}
+
+
+
+
+
+
+
